@@ -516,6 +516,57 @@ dialog::backdrop{background:rgba(10,11,18,.5);backdrop-filter:blur(3px)}
 @media (min-width:861px){.dxstage{width:min(480px,100%);margin:0 auto}.dxfilt{justify-content:center}.dxsheet .pane{left:50%;right:auto;width:min(560px,100%);transform:translateX(-50%);border-radius:20px 20px 0 0}@keyframes sheetup{from{opacity:0}to{opacity:1}}}
 @media (max-height:640px){.dxctl{gap:14px;padding-top:8px}.dxctl .skip,.dxctl .save{width:56px;height:56px}.dxctl .undo{width:44px;height:44px}.dxinfo{padding:8px 12px}.dxinfo .hk{-webkit-line-clamp:1}}
 
+
+/* ---------- Remix Studio: static image ad generator (Claude plans, OpenAI paints) ---------- */
+.rx{position:fixed;inset:0;z-index:80;background:#f7f7f9;color:var(--ink);display:none;flex-direction:column;height:100vh;height:100dvh}
+.rx.open{display:flex;animation:fadein .2s both}
+.rxbar{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px;background:#fff;border-bottom:1px solid var(--line2);flex:0 0 auto}
+.rxbar b{flex:1;font-size:17px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rxbar .ib{width:40px;height:40px;border-radius:10px;border:0;background:var(--soft);display:grid;place-items:center;cursor:pointer;color:var(--ink);flex:0 0 auto}
+.rxbody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px calc(28px + env(safe-area-inset-bottom,0px))}
+.rxwrap{max-width:1080px;margin:0 auto;display:grid;gap:16px}
+.rxtop{display:grid;grid-template-columns:240px minmax(0,1fr);gap:16px;align-items:start}
+.rxref{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.rxref img{display:block;width:100%;height:auto;max-height:340px;object-fit:contain;background:#0f1117}
+.rxref .cap{padding:8px 10px;font-size:12.5px;color:var(--muted)}
+.rxref .cap b{display:block;color:var(--ink);font-size:13.5px}
+.rxpanel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:12px;min-width:0}
+.rxpanel h3{margin:0;font-size:15px;display:flex;align-items:center;gap:8px}
+.rxpanel h3 small{margin-left:auto;font-weight:500;color:var(--muted);font-size:12px}
+.rxrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.rxrow label{display:grid;gap:4px;font-size:12.5px;font-weight:600;color:var(--tx);min-width:120px;flex:1}
+.rxin,.rxsel,.rxta{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 11px;font-size:15px;background:#fff;color:var(--ink);outline:none;font-family:inherit}
+.rxta{min-height:64px;resize:vertical;line-height:1.45}
+.rxin:focus,.rxsel:focus,.rxta:focus{border-color:var(--pri)}
+.rxbtn{border:0;border-radius:11px;padding:11px 15px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;background:var(--soft);color:var(--ink);font-size:14px}
+.rxbtn.pri{background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff}
+.rxbtn.hot{background:linear-gradient(135deg,#ec4899,#f97316);color:#fff}
+.rxbtn[disabled]{opacity:.5;pointer-events:none}
+.rxwhy{display:grid;gap:6px;font-size:13.5px;color:var(--tx);margin:0;padding-left:18px}
+.rxlay{font-size:13px;color:var(--muted);background:var(--soft);border-radius:10px;padding:9px 11px}
+.rxcon{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.rxc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:10px;align-content:start;animation:rise .4s var(--ease) both}
+.rxc h4{margin:0;font-size:14px;display:flex;gap:8px;align-items:center}
+.rxc h4 span{font-size:11px;font-weight:700;color:var(--pri);background:var(--pri-soft);border-radius:6px;padding:2px 7px}
+.rxc .f{display:grid;gap:4px;font-size:12px;font-weight:600;color:var(--muted)}
+.rxout{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.rximg{position:relative;border-radius:10px;overflow:hidden;background:var(--soft);border:1px solid var(--line2)}
+.rximg img{display:block;width:100%;height:auto;cursor:zoom-in}
+.rximg .act{display:flex;gap:4px;padding:6px;background:#fff}
+.rximg .act button,.rximg .act a{flex:1;border:0;border-radius:8px;background:var(--soft);padding:7px 4px;font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;justify-content:center;align-items:center;gap:4px;color:var(--ink);text-decoration:none;min-height:34px}
+.rxwait{aspect-ratio:1;display:grid;place-items:center;text-align:center;font-size:12px;color:var(--muted);background:linear-gradient(100deg,#f2f4f7 30%,#fafbfc 50%,#f2f4f7 70%);background-size:200% 100%;animation:shimmer 1.3s linear infinite;border-radius:10px;padding:10px}
+.rxerr{font-size:13px;color:var(--red);background:var(--red-soft);border-radius:10px;padding:9px 11px;overflow-wrap:anywhere}
+.rxnote{font-size:12.5px;color:var(--muted);line-height:1.5}
+.rxtabs{display:flex;gap:6px;flex-wrap:wrap}
+.rxtabs button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 13px;font-weight:600;cursor:pointer;min-height:40px;color:var(--tx)}
+.rxtabs button[aria-pressed="true"]{border-color:var(--pri);background:var(--pri-soft);color:var(--pri)}
+.rxlogo{display:flex;align-items:center;gap:10px}
+.rxlogo img{height:44px;max-width:120px;object-fit:contain;background:var(--soft);border-radius:8px;padding:4px}
+.rxhist{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.rxzoom{position:fixed;inset:0;z-index:90;background:rgba(5,6,12,.9);display:flex;align-items:center;justify-content:center;padding:16px;cursor:zoom-out}
+.rxzoom img{max-width:100%;max-height:100%;border-radius:8px}
+.rxgo{display:inline-flex;align-items:center;gap:6px}
+@media (max-width:760px){.rxtop{grid-template-columns:1fr}.rxref img{max-height:260px}.rxcon{grid-template-columns:1fr}.rxbody{padding:12px 12px calc(24px + env(safe-area-inset-bottom,0px))}}
 </style>
 </head>
 <body>
@@ -936,7 +987,7 @@ function boardMenu(st){
 function newMenu(){
   return `<div class="ph">Create</div><div class="pl">
    <button class="mi" type="button" data-act="savead">${ic("bookmark","s")}<span>Save New Ad</span></button>
-   <button class="mi" type="button" data-act="upload">${ic("upload","s")}<span>Manual Upload</span></button>
+   <button class="mi" type="button" data-rxgo="">${ic("wand","s")}<span>Remix Studio</span></button><button class="mi" type="button" data-act="upload">${ic("upload","s")}<span>Manual Upload</span></button>
    <hr><button class="mi" type="button" data-act="newboard">${ic("board","s")}<span>Create Board</span></button>
    <button class="mi" type="button" data-act="newfolder">${ic("folder","s")}<span>Create Folder</span></button>
    <button class="mi dis" type="button" data-act="brief">${ic("brief","s")}<span>Create Brief</span><span class="soon">Phase 2</span></button></div>`;
@@ -1023,7 +1074,7 @@ function select(r,quiet){
      <div class="mstage" id="mstage">${previewHTML(r)}</div></div>
    <aside class="mright"><div class="mtabs" role="tablist"><button type="button" data-mtab="details" aria-selected="${MTAB==="details"}">Details</button><button type="button" data-mtab="ai" aria-selected="${MTAB==="ai"}">AI Analysis</button></div>
      <div class="mbody" id="mbody">${MTAB==="ai"?aiHTML(r):detailsHTML(r)}</div>
-     <div class="mfoot">${r.lib?`<a href="${esc(r.lib)}" target="_blank" rel="noopener">${ic("ext","s")}Meta Ad Library</a>`:""}${r.fp?`<a href="${esc(r.fp)}" target="_blank" rel="noopener">${ic("ext","s")}Foreplay</a>`:""}${vidOf(r)||r.image?`<a href="${esc(vidOf(r)||r.image)}" target="_blank" rel="noopener" download>${ic("download","s")}${vidOf(r)?"Video":"Image"}</a>`:""}${r._manual?`<a href="#" data-delman="${esc(r.id)}">${ic("trash","s")}Delete upload</a>`:""}</div></aside></div>`;
+     <div class="mfoot">${r.lib?`<a href="${esc(r.lib)}" target="_blank" rel="noopener">${ic("ext","s")}Meta Ad Library</a>`:""}${r.fp?`<a href="${esc(r.fp)}" target="_blank" rel="noopener">${ic("ext","s")}Foreplay</a>`:""}${vidOf(r)||r.image?`<a href="${esc(vidOf(r)||r.image)}" target="_blank" rel="noopener" download>${ic("download","s")}${vidOf(r)?"Video":"Image"}</a>`:""}${thumbOf(r)||r.image?`<a href="#" data-rxgo="${esc(r.id)}" style="color:#be185d">${ic("wand","s")}Remix this ad</a>`:""}${r._manual?`<a href="#" data-delman="${esc(r.id)}">${ic("trash","s")}Delete upload</a>`:""}</div></aside></div>`;
   h2fix(m,r);
   m.classList.add("open"); m.setAttribute("aria-hidden","false");
   const vid=m.querySelector(".pvm video"); if(vid) vid.addEventListener("error",()=>{const c=vid.error&&vid.error.code; vid.parentElement.insertAdjacentHTML("beforeend",`<div class="err" data-err="${c}">${c===4?"This browser can't play this video format. Use the Video link below or Foreplay.":c===2?"The video didn't load. The link may have expired; try Foreplay.":"The video couldn't play. Try Foreplay."}</div>`);});
@@ -1506,7 +1557,7 @@ const DX=(()=>{
      `<dl class="dxkv"><dt>Advertiser</dt><dd>${esc(r.adv)}</dd><dt>Selling to</dt><dd>${esc((r.facets.fit||[])[0]||"")}</dd><dt>Format</dt><dd>${esc(r.fmt)}${r.vdur?` · ${Math.round(r.vdur)}s`:""}</dd><dt>Language</dt><dd>${esc(r.lang)}</dd>
        <dt>Status</dt><dd>${isLive(r)?"Running on 17 Oct":"Not running on 17 Oct"}${r.days!=null?` · ${r.days} days`:""}</dd><dt>Ad goes to</dt><dd>${dest}</dd>${(r.facets.offer||[]).filter(o=>o!=="No clear offer").length?`<dt>Offer tags</dt><dd>${esc(r.facets.offer.filter(o=>o!=="No clear offer").join(", "))}</dd>`:""}<dt>Source</dt><dd>${esc(r.src||"Foreplay")}</dd></dl>
       ${blk("Headline",r.headline,E.headline)}${blk("Ad copy",r.copy,E.copy)}${blk("Transcript",r.tr,E.tr)}${blk("Card text",r.cardText,E.cardText)}
-      <div class="dxlinks">${r.lib?`<a href="${esc(r.lib)}" target="_blank" rel="noopener">${ic("ext","s")}Meta Ad Library</a>`:""}${r.fp?`<a href="${esc(r.fp)}" target="_blank" rel="noopener">${ic("ext","s")}Foreplay</a>`:""}${vidOf(r)||r.image?`<a href="${esc(vidOf(r)||r.image)}" target="_blank" rel="noopener">${ic("download","s")}${vidOf(r)?"Video file":"Image file"}</a>`:""}</div>
+      <div class="dxlinks">${thumbOf(r)||r.image?`<a href="#" data-rxgo="${esc(r.id)}" style="border-color:#f9a8d4;color:#be185d">${ic("wand","s")}Remix this ad</a>`:""}${r.lib?`<a href="${esc(r.lib)}" target="_blank" rel="noopener">${ic("ext","s")}Meta Ad Library</a>`:""}${r.fp?`<a href="${esc(r.fp)}" target="_blank" rel="noopener">${ic("ext","s")}Foreplay</a>`:""}${vidOf(r)||r.image?`<a href="${esc(vidOf(r)||r.image)}" target="_blank" rel="noopener">${ic("download","s")}${vidOf(r)?"Video file":"Image file"}</a>`:""}</div>
       <p class="dxnote">No spend, CPL or results data exists for this ad.</p>`,
      cur&&r.fam===cur.fam?`<button class="dxbtn ghost" type="button" data-dx="skip" style="background:var(--soft);color:#f04438">${ic("x","s")}Skip</button><button class="dxbtn pri" type="button" data-dx="save" style="background:linear-gradient(135deg,#12b76a,#0ba5a0)">${ic("heart","s")}Save</button>`:"");
   }
@@ -1574,6 +1625,196 @@ const dxHash=()=>{ const h=location.hash; if(h==="#swipe"||h.startsWith("#swipe?
 if(dxHash()!=null) DX.open(dxHash());
 addEventListener("hashchange",()=>{ const q=dxHash(); if(q!=null) DX.open(q); });
 window.render(true);
+
+/* ================= Remix Studio =================
+   Static image ads modeled on a competitor ad. Claude (vision) reads the ad and writes 3 brand-safe concepts;
+   OpenAI's image model paints them, using the competitor ad only as a layout reference plus your real logo.
+   Keys and brand kit live in this browser only. */
+Object.assign(ICONS,{wand:'<path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/>',
+ key:'<path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/>',
+ history:'<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/>'});
+const RX=(()=>{
+  const MODELS=[["gpt-image-2","GPT Image 2 (default)"],["gpt-image-2.5-flare","GPT Image 2.5 Flare (newest)"],["gpt-image-2.5-sunburst","GPT Image 2.5 Sunburst (newest)"],["gpt-image-1.5","GPT Image 1.5"]];
+  const SIZES=[["1024x1024","Square 1:1 (feed)"],["1024x1280","Portrait 4:5 (feed)"],["1024x1536","Tall 2:3 (stories)"]];
+  const QUAL=[["low","Draft"],["medium","Standard"],["high","High"]];
+  const PRICE={low:[.006,.005],medium:[.053,.041],high:[.211,.165]};
+  const BRAND_DEF={name:"Rocket Launch Media",audience:"Immigration law firm owners and managing attorneys in the US",offer:"Lead generation, intake automation and bilingual staffing for immigration law firms",cta:"Book a Strategy Call",colors:"Dark navy #0f1029, pink #ec4899 to orange #f97316 gradient, white text",style:"Bold, clean, modern. Big readable headline. Minimal clutter.",rules:"No guarantees of results. No invented numbers, stats, reviews or client names. No fake awards. Never use the competitor's name, logo or exact wording.",logo:""};
+  let brand={...BRAND_DEF,...store.get("rxbrand",{})};
+  let opt={model:"gpt-image-2",size:"1024x1280",quality:"medium",useRef:true,...store.get("rxopt",{})};
+  let el=null, ad=null, plan=null, tab="make", busy=false;
+  const oai=()=>store.get("oaikey","")||"";
+  const ant=()=>store.get("apikey","")||"";
+  const saveBrand=()=>store.set("rxbrand",brand), saveOpt=()=>store.set("rxopt",opt);
+  const refUrl=r=>r.image||thumbOf(r)||"";
+  const cost=()=>{ if(opt.model!=="gpt-image-2") return "billed by OpenAI per image"; const p=PRICE[opt.quality]; return `about $${(opt.size==="1024x1024"?p[0]:p[1]).toFixed(opt.quality==="low"?3:2)} per image`; };
+  function mount(){ if(el) return; el=document.createElement("div"); el.className="rx"; el.id="rx"; el.setAttribute("role","dialog"); el.setAttribute("aria-modal","true"); el.setAttribute("aria-label","Remix Studio");
+    document.body.appendChild(el); el.addEventListener("click",onClick); el.addEventListener("change",onChange); el.addEventListener("input",onInput); }
+  const sel=(k,opts,v)=>`<select class="rxsel" data-rxo="${k}">${opts.map(([a,b])=>`<option value="${a}" ${a===v?"selected":""}>${b}</option>`).join("")}</select>`;
+  function settingsHTML(){
+    return `<div class="rxpanel"><h3>${ic("key","s")}API keys <small>Saved in this browser only</small></h3>
+      <div class="rxrow"><label>Claude key (plans the ad and writes copy)<input class="rxin" type="password" data-rxk="apikey" value="${esc(ant())}" placeholder="sk-ant-..." autocomplete="off"></label></div>
+      <div class="rxrow"><label>OpenAI key (paints the image)<input class="rxin" type="password" data-rxk="oaikey" value="${esc(oai())}" placeholder="sk-proj-..." autocomplete="off"></label></div>
+      <p class="rxnote">Keys are stored in this browser's local storage and sent only to Anthropic and OpenAI. They are never put on the website. Anyone you share the library link with uses their own keys.</p></div>
+     <div class="rxpanel"><h3>${ic("tag","s")}Brand kit</h3>
+      <div class="rxrow"><label>Brand name<input class="rxin" data-rxb="name" value="${esc(brand.name)}"></label><label>Call to action<input class="rxin" data-rxb="cta" value="${esc(brand.cta)}"></label></div>
+      <label class="rxrow" style="display:grid"><span style="font-size:12.5px;font-weight:600">Who the ads are for</span><input class="rxin" data-rxb="audience" value="${esc(brand.audience)}"></label>
+      <label style="display:grid;gap:4px;font-size:12.5px;font-weight:600">What you sell<textarea class="rxta" data-rxb="offer">${esc(brand.offer)}</textarea></label>
+      <label style="display:grid;gap:4px;font-size:12.5px;font-weight:600">Colors<input class="rxin" data-rxb="colors" value="${esc(brand.colors)}"></label>
+      <label style="display:grid;gap:4px;font-size:12.5px;font-weight:600">Style<input class="rxin" data-rxb="style" value="${esc(brand.style)}"></label>
+      <label style="display:grid;gap:4px;font-size:12.5px;font-weight:600">Rules (never break)<textarea class="rxta" data-rxb="rules">${esc(brand.rules)}</textarea></label>
+      <div class="rxlogo">${brand.logo?`<img src="${brand.logo}" alt="Logo">`:`<span class="rxnote">No logo yet. Without one, the image model writes the brand name as text.</span>`}<label class="rxbtn">${ic("upload","s")}${brand.logo?"Replace logo":"Upload logo (PNG)"}<input type="file" accept="image/png,image/jpeg,image/webp" data-rxlogo="1" hidden></label>${brand.logo?`<button class="rxbtn" type="button" data-rx="nologo">Remove</button>`:""}</div>
+      <button class="rxbtn" type="button" data-rx="branddef">Reset brand kit to RLM defaults</button></div>`;
+  }
+  function makeHTML(){
+    if(!ad) return `<div class="rxpanel"><p class="rxnote">Open any image ad in the library or Swipe mode and tap <b>Remix</b>.</p></div>`;
+    const ref=refUrl(ad); const need=!ant()||!oai();
+    return `<div class="rxtop"><div class="rxref">${ref?`<img src="${esc(ref)}" alt="Reference ad from ${esc(ad.adv)}">`:""}<div class="cap"><b>${esc(ad.adv)}</b>${esc(ad.fmt)}${ad.fmt==="Video"?" · using the video's cover frame":""} · reference only</div></div>
+      <div class="rxpanel"><h3>${ic("sliders","s")}Output</h3>
+        <div class="rxrow"><label>Size${sel("size",SIZES,opt.size)}</label><label>Quality${sel("quality",QUAL,opt.quality)}</label></div>
+        <div class="rxrow"><label>Image model${sel("model",MODELS,opt.model)}</label></div>
+        <label class="dxchk"><input type="checkbox" data-rxo="useRef" ${opt.useRef?"checked":""}><span>Send the competitor ad as a layout reference<small>The model copies the structure and composition, not their logo, name or words.</small></span></label>
+        <p class="rxnote">Cost: ${cost()}. Claude planning uses your Claude credits (a few cents per ad).</p>
+        ${need?`<div class="rxerr">Add your ${!ant()?"Claude":""}${!ant()&&!oai()?" and ":""}${!oai()?"OpenAI":""} key in Settings first.</div><button class="rxbtn pri" type="button" data-rxtab="settings">${ic("key","s")}Open Settings</button>`
+          :`<button class="rxbtn pri" type="button" data-rx="plan" ${busy?"disabled":""}>${ic("sparkles","s")}${plan?"Re-read the ad and write new concepts":"Break it down and write 3 concepts"}</button>`}
+      </div></div>
+      <div id="rxplan">${planHTML()}</div>`;
+  }
+  function planHTML(){
+    if(!plan) return "";
+    if(plan.wait) return `<div class="rxpanel"><h3>${ic("sparkles","s")}Claude is reading the ad…</h3><div class="dots"><i></i><i></i><i></i></div></div>`;
+    if(plan.err) return `<div class="rxerr">${esc(plan.err)}</div>`;
+    const R=plan.read||{};
+    return `<div class="rxpanel"><h3>${ic("eye","s")}Why it works</h3><ul class="rxwhy">${(R.why||[]).map(w=>`<li>${esc(w)}</li>`).join("")}</ul>${R.layout?`<div class="rxlay"><b>Layout:</b> ${esc(R.layout)}</div>`:""}</div>
+      <div class="rxrow"><button class="rxbtn hot" type="button" data-rx="genall" ${busy?"disabled":""}>${ic("wand","s")}Generate all 3</button><span class="rxnote">Edit any text first. The image model is told to use your text exactly.</span></div>
+      <div class="rxcon">${(plan.concepts||[]).map((c,i)=>`<div class="rxc" data-ci="${i}"><h4><span>${i+1}</span>${esc(c.name||"Concept")}</h4>
+        <div class="rxnote">${esc(c.angle||"")}</div>
+        <label class="f">Headline<input class="rxin" data-cf="headline" value="${esc(c.headline||"")}"></label>
+        <label class="f">Subhead<input class="rxin" data-cf="subhead" value="${esc(c.subhead||"")}"></label>
+        <label class="f">Button<input class="rxin" data-cf="cta" value="${esc(c.cta||brand.cta)}"></label>
+        <label class="f">Visual<textarea class="rxta" data-cf="visual">${esc(c.visual||"")}</textarea></label>
+        <button class="rxbtn pri" type="button" data-rx="gen" data-i="${i}" ${busy?"disabled":""}>${ic("wand","s")}Generate</button>
+        <div class="rxout" id="rxo${i}">${(c.out||[]).map((o,j)=>outHTML(o,i,j)).join("")}</div></div>`).join("")}</div>`;
+  }
+  function outHTML(o,i,j){
+    if(o.wait) return `<div class="rxwait">${o.wait}</div>`;
+    if(o.err) return `<div class="rxerr">${esc(o.err)}</div>`;
+    return `<div class="rximg"><img src="${o.url}" alt="Generated ad ${i+1}" data-rxz="1"><div class="act"><a href="${o.url}" download="${esc(fileName(i))}">${ic("download","xs")}Save</a><button type="button" data-rx="tweak" data-i="${i}" data-j="${j}">${ic("pen","xs")}Tweak</button><button type="button" data-rx="again" data-i="${i}">${ic("undo","xs")}Again</button></div></div>`;
+  }
+  const fileName=i=>`remix-${(ad?ad.adv:"ad").replace(/[^a-z0-9]+/gi,"-").toLowerCase()}-${i+1}-${Date.now()}.png`;
+  async function histHTML(){
+    const h=store.get("remixes",[]);
+    if(!h.length) return `<div class="rxpanel"><p class="rxnote">No remixes yet.</p></div>`;
+    const items=[]; for(const m of h.slice(0,60)){ const b=await IDB.get("rx-"+m.id); if(b) items.push([m,URL.createObjectURL(b)]); }
+    return `<div class="rxpanel"><h3>${ic("history","s")}My remixes <small>${h.length} saved in this browser</small></h3><div class="rxhist">${items.map(([m,u])=>`<div class="rximg"><img src="${u}" alt="" data-rxz="1"><div class="act"><a href="${u}" download="remix-${m.id}.png">${ic("download","xs")}Save</a>${byId(m.ref)?`<button type="button" data-rxgo2="${esc(m.ref)}">${ic("eye","xs")}Source</button>`:""}</div><div class="rxnote" style="padding:0 8px 8px">${esc(m.headline||"")}</div></div>`).join("")}</div></div>`;
+  }
+  async function draw(){
+    el.innerHTML=`<div class="rxbar"><button class="ib" type="button" data-rx="close" aria-label="Close">${ic("x")}</button><b>${ic("wand","s")} Remix Studio</b>
+      <div class="rxtabs"><button type="button" data-rxtab="make" aria-pressed="${tab==="make"}">Remix</button><button type="button" data-rxtab="hist" aria-pressed="${tab==="hist"}">History</button><button type="button" data-rxtab="settings" aria-pressed="${tab==="settings"}" aria-label="Settings">${ic("settings","s")}</button></div></div>
+      <div class="rxbody"><div class="rxwrap" id="rxw">${tab==="settings"?settingsHTML():tab==="hist"?`<div class="dots"><i></i><i></i><i></i></div>`:makeHTML()}</div></div>`;
+    if(tab==="hist") $("#rxw").innerHTML=await histHTML();
+  }
+  const redrawPlan=()=>{ const p=$("#rxplan"); if(p) p.innerHTML=planHTML(); };
+  /* ---------- Claude: read the ad, write concepts ---------- */
+  async function runPlan(){
+    busy=true; plan={wait:1}; await draw();
+    const E=ad.en||{};
+    const adText=[["Headline",E.headline||ad.headline],["Copy",E.copy||ad.copy],["Transcript",E.tr||ad.tr],["CTA",(ad.extra||[]).find(x=>x[0]==="CTA button")?.[1]]].filter(x=>x[1]).map(([k,v])=>`${k}: ${String(v).slice(0,1500)}`).join("\n");
+    const sys=`You are a senior direct-response art director. You study a competitor's static Meta ad and design new static ads for OUR brand that reuse what makes it work (structure, hook pattern, visual hierarchy) without copying it.
+OUR BRAND: ${brand.name}
+AUDIENCE: ${brand.audience}
+WHAT WE SELL: ${brand.offer}
+CTA: ${brand.cta}
+COLORS: ${brand.colors}
+STYLE: ${brand.style}
+RULES (never break): ${brand.rules}
+Return JSON only, no prose, in this shape:
+{"read":{"why":["3-5 short bullets on why the reference ad grabs attention"],"layout":"one or two sentences describing the layout: where headline, image, proof, button sit"},
+ "concepts":[{"name":"2-4 words","angle":"one sentence","headline":"max 8 words","subhead":"max 14 words","cta":"max 4 words","visual":"what the image shows, concrete, no text in it besides headline/subhead/cta/logo","image_prompt":"complete prompt for an image model: a finished static ad in the reference's layout pattern, our colors and style, the exact headline, subhead and button text in quotes, logo placement, and 'no other text'. Never mention the competitor."}]}
+Write exactly 3 concepts with different angles. Short, punchy, plain English. Do not invent numbers or results.`;
+    const content=[]; const ref=refUrl(ad);
+    if(ref) content.push({type:"image",source:{type:"url",url:ref}});
+    content.push({type:"text",text:`Competitor: ${ad.adv}\nFormat: ${ad.fmt}\n${adText||"(no text captured)"}\n\nDesign 3 new static ads for ${brand.name}.`});
+    try{
+      const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"content-type":"application/json","x-api-key":ant(),"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+        body:JSON.stringify({model:(typeof model==="function"?model():"claude-sonnet-5-5"),max_tokens:2500,system:sys,messages:[{role:"user",content}]})});
+      const j=await res.json(); if(!res.ok) throw new Error((j.error&&j.error.message)||("HTTP "+res.status));
+      const txt=(j.content||[]).filter(c=>c.type==="text").map(c=>c.text).join(""); const m=txt.match(/\{[\s\S]*\}/); if(!m) throw new Error("Claude didn't return a plan. Try again.");
+      plan=JSON.parse(m[0]); plan.concepts=(plan.concepts||[]).slice(0,3).map(c=>({...c,out:[]}));
+    }catch(e){ plan={err:`Claude couldn't read the ad: ${e.message}`}; }
+    busy=false; await draw();
+  }
+  /* ---------- OpenAI: paint ---------- */
+  async function blobFromUrl(u){ const r=await fetch(u,{mode:"cors"}); if(!r.ok) throw new Error("HTTP "+r.status); return await r.blob(); }
+  const blobFromData=d=>fetch(d).then(r=>r.blob());
+  function promptFor(c,hasRef,hasLogo){
+    const base=c.image_prompt||`Static Meta ad for ${brand.name}. ${c.visual}. Colors: ${brand.colors}. Style: ${brand.style}.`;
+    return [hasRef?`Image 1 is a competitor ad. Use it ONLY as a layout and composition reference. Do not copy its logo, brand name or any of its words. Do not reuse its photo or its people: create a new, original scene with different people.`:"",
+      hasLogo?`Image ${hasRef?2:1} is our logo. Place it exactly as provided, small and clean, without redrawing it.`:`Show the brand name "${brand.name}" as a small wordmark.`,
+      base, `Visual: ${c.visual||""}`,
+      `Use this text exactly and no other words: headline "${c.headline}"${c.subhead?`, subhead "${c.subhead}"`:""}, button "${c.cta||brand.cta}". Spell every word exactly. Large, high-contrast, readable on a phone.`,
+      `Colors: ${brand.colors}. ${brand.rules}`].filter(Boolean).join("\n");
+  }
+  async function paint(prompt,images){
+    let res;
+    if(images.length){ const fd=new FormData(); fd.append("model",opt.model); fd.append("prompt",prompt); fd.append("size",opt.size); fd.append("quality",opt.quality); fd.append("n","1");
+      images.forEach((b,i)=>fd.append("image[]",new File([b],`ref${i}.${(b.type||"image/png").split("/")[1]||"png"}`,{type:b.type||"image/png"})));
+      res=await fetch("https://api.openai.com/v1/images/edits",{method:"POST",headers:{Authorization:"Bearer "+oai()},body:fd});
+    } else res=await fetch("https://api.openai.com/v1/images/generations",{method:"POST",headers:{Authorization:"Bearer "+oai(),"Content-Type":"application/json"},body:JSON.stringify({model:opt.model,prompt,size:opt.size,quality:opt.quality,n:1})});
+    const j=await res.json(); if(!res.ok) throw new Error((j.error&&j.error.message)||("HTTP "+res.status));
+    const b64=j.data&&j.data[0]&&j.data[0].b64_json; if(!b64) throw new Error("No image came back");
+    const bin=atob(b64), u8=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u8[i]=bin.charCodeAt(i); return new Blob([u8],{type:"image/png"});
+  }
+  async function keep(blob,c){ const id=Date.now().toString(36)+Math.random().toString(36).slice(2,6); await IDB.put("rx-"+id,blob);
+    const h=store.get("remixes",[]); h.unshift({id,at:Date.now(),ref:ad.id,adv:ad.adv,headline:c.headline,model:opt.model,size:opt.size}); store.set("remixes",h.slice(0,300)); }
+  async function gen(i,base){
+    const c=plan.concepts[i]; const slot={wait:base?"Applying your tweak…":"Painting… about 20 to 60 seconds"}; c.out.unshift(slot); redrawPlan();
+    try{
+      const imgs=[]; let hasRef=false;
+      if(base){ imgs.push(base.blob); }
+      else { if(opt.useRef&&refUrl(ad)){ try{ imgs.push(await blobFromUrl(refUrl(ad))); hasRef=true; }catch(_){ } } }
+      if(brand.logo) imgs.push(await blobFromData(brand.logo));
+      const prompt=base?`Image 1 is our draft ad. Keep everything identical except this change: ${base.change}. Keep all text spelled exactly as it is.${brand.logo?" Image 2 is our logo; keep it exact.":""}`:promptFor(c,hasRef,!!brand.logo);
+      const blob=await paint(prompt,imgs);
+      Object.assign(slot,{wait:null,blob,url:URL.createObjectURL(blob)}); await keep(blob,c);
+    }catch(e){ Object.assign(slot,{wait:null,err:`Image failed: ${e.message}`}); }
+    redrawPlan();
+  }
+  /* ---------- events ---------- */
+  function onInput(e){ const t=e.target;
+    if(t.dataset.cf){ const i=+t.closest("[data-ci]").dataset.ci; plan.concepts[i][t.dataset.cf]=t.value; if(t.dataset.cf!=="visual") plan.concepts[i].image_prompt=null; return; }
+    if(t.dataset.rxb){ brand[t.dataset.rxb]=t.value; saveBrand(); return; }
+    if(t.dataset.rxk){ store.set(t.dataset.rxk,t.value.trim()); if(typeof showMode==="function") showMode(); return; } }
+  function onChange(e){ const t=e.target;
+    if(t.dataset.rxo){ opt[t.dataset.rxo]=t.type==="checkbox"?t.checked:t.value; saveOpt(); const n=el.querySelector(".rxpanel .rxnote"); if(n&&tab==="make") draw(); return; }
+    if(t.dataset.rxlogo&&t.files[0]){ const f=t.files[0]; const img=new Image(); img.onload=()=>{ const s=Math.min(1,512/Math.max(img.width,img.height)); const cv=document.createElement("canvas"); cv.width=Math.round(img.width*s); cv.height=Math.round(img.height*s); cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height); brand.logo=cv.toDataURL("image/png"); saveBrand(); draw(); }; img.src=URL.createObjectURL(f); } }
+  async function onClick(e){ e.stopPropagation();
+    const z=e.target.closest("[data-rxz]"); if(z){ const d=document.createElement("div"); d.className="rxzoom"; d.innerHTML=`<img src="${z.src}" alt="">`; d.onclick=()=>d.remove(); el.appendChild(d); return; }
+    const g2=e.target.closest("[data-rxgo2]"); if(g2){ open(g2.dataset.rxgo2); return; }
+    const tb=e.target.closest("[data-rxtab]"); if(tb){ tab=tb.dataset.rxtab; draw(); return; }
+    const t=e.target.closest("[data-rx]"); if(!t) return; const a=t.dataset.rx;
+    if(a==="close") return close();
+    if(a==="plan") return runPlan();
+    if(a==="gen") return gen(+t.dataset.i);
+    if(a==="again") return gen(+t.dataset.i);
+    if(a==="genall"){ for(let i=0;i<plan.concepts.length;i++) gen(i); return; }
+    if(a==="tweak"){ const i=+t.dataset.i, j=+t.dataset.j; const o=plan.concepts[i].out[j]; const change=prompt("What should change? (e.g. make the headline bigger, use a white background)"); if(change&&o&&o.blob) gen(i,{blob:o.blob,change}); return; }
+    if(a==="nologo"){ brand.logo=""; saveBrand(); draw(); return; }
+    if(a==="branddef"){ const logo=brand.logo; brand={...BRAND_DEF,logo}; saveBrand(); draw(); return; }
+  }
+  function open(id){ mount(); const r=id&&byId(id); if(r&&r!==ad){ ad=r; plan=null; } tab=(!ant()||!oai())&&!r?"settings":"make"; el.classList.add("open"); document.documentElement.style.overflow="hidden"; draw(); }
+  function close(){ if(!el) return; el.classList.remove("open"); if(!$("#dx.open")) document.documentElement.style.overflow=""; }
+  document.addEventListener("keydown",e=>{ if(el&&el.classList.contains("open")&&e.key==="Escape"){ e.stopImmediatePropagation(); const z=el.querySelector(".rxzoom"); if(z) z.remove(); else close(); } },true);
+  return {open,close,get plan(){return plan;},get opt(){return opt;},get brand(){return brand;},promptFor,paint};
+})();
+document.addEventListener("click",e=>{ const t=e.target.closest("[data-rxgo]"); if(t){ e.preventDefault(); e.stopPropagation(); RX.open(t.dataset.rxgo); } },true);
+
+/* One-tap key setup: a private link #setup=<base64 JSON> saves the owner's keys to this browser after a confirm, then wipes itself from the address bar. Keys never live in the site code. */
+(()=>{ const h=location.hash; if(!h.startsWith("#setup=")) return;
+  try{ history.replaceState(null,"",location.pathname+location.search); }catch(_){}
+  let k=null; try{ k=JSON.parse(decodeURIComponent(escape(atob(h.slice(7).replace(/-/g,"+").replace(/_/g,"/"))))); }catch(_){}
+  if(!k||(!k.a&&!k.o)) return;
+  setTimeout(()=>{ if(confirm("Save the Claude and OpenAI API keys from this setup link to this browser? (They stay on this device only.)")){ if(k.a) store.set("apikey",k.a); if(k.o) store.set("oaikey",k.o); if(typeof showMode==="function") showMode(); toast("API keys saved to this browser"); } },300);
+})();
 </script>
 </body>
 </html>

@@ -17,3 +17,9 @@ Mobile-first Discover mode: open with "Swipe mode" (tabs) or the Swipe button on
 - `swipe/` opens Swipe mode, and filters go in the link: `swipe/?format=image&for=immigration`.
 - Parameters: `format=image|video`, `for=immigration|any-law-firm|other-practice`, `lang=en|es`, `offer=guarantee|free-audit|intake|ai|exclusive|webinar|seo|pay-per-lead|pay-per-case|social|free-leads`, `live=1`, `goes=form|landing`, `q=keyword`, `says=immigration`, `text=1` (include text-only ads).
 - The Share button copies the current link. No board step for visitors; first save creates "My picks" in their own browser.
+
+## Remix Studio (31 Oct 2026)
+- "Remix this ad" on any ad with an image (detail view, Swipe mode info sheet), or "+ New > Remix Studio".
+- Claude (vision) reads the competitor ad and writes 3 concepts for your brand kit; OpenAI's image model paints them, using the competitor ad only as a layout reference plus your own logo.
+- Uses the visitor's own Claude and OpenAI keys, saved in their browser only. No keys are in this repo.
+- Generated images are kept in the browser (History tab) and download as PNG.
