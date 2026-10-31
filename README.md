@@ -12,3 +12,8 @@ Mobile-first Discover mode: open with "Swipe mode" (tabs) or the Swipe button on
 - Swipe right or tap Save: adds the ad to the active inspiration board (same Swipe File storage as the grid). Swipe left or tap Skip: hidden for that board's session only, never deleted. Undo reverses the last action.
 - Boards, saves and skips live in this browser only. Export / Import a JSON backup from the board menu.
 - Immigration firms' own consumer ads are in the separate Immigration Ad Library and are not merged here.
+
+### Shareable swipe links (31 Oct 2026)
+- `swipe/` opens Swipe mode, and filters go in the link: `swipe/?format=image&for=immigration`.
+- Parameters: `format=image|video`, `for=immigration|any-law-firm|other-practice`, `lang=en|es`, `offer=guarantee|free-audit|intake|ai|exclusive|webinar|seo|pay-per-lead|pay-per-case|social|free-leads`, `live=1`, `goes=form|landing`, `q=keyword`, `says=immigration`, `text=1` (include text-only ads).
+- The Share button copies the current link. No board step for visitors; first save creates "My picks" in their own browser.
